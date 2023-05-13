@@ -3,3 +3,4 @@
 *.txt
 *.csv
 .vscode
+!epl_results.csv

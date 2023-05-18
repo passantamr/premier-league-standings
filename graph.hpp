@@ -9,14 +9,14 @@
 class Graph
 {
 private:
-    std::vector<Team> teams;
-    std::map<Team, std::vector<Match>> edges;
+    std::vector<Team*> teams;
+    std::map<Team *, std::vector<Match *>> edges;
 
 public:
     Graph();
-    Team add_team(std::string title);
+    Team* add_team(std::string title);
     void add_match(std::vector<std::string> row);
-    std::vector<Team> getTeams();
-    std::vector<Match> getTeamMatches(Team team);
+    std::vector<Team*> getTeams();
+    std::vector<Match*> getTeamMatches(Team* team);
 };
 #endif

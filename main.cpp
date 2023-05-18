@@ -13,14 +13,13 @@ int main()
     {
         graph.add_match(content[i]);
     }
-
     for (auto i : graph.getTeams())
     {
-        std::cout << i.getTitle() << ":  ";
+        std::cout << i->getTitle() << ":  ";
         for (auto k : graph.getTeamMatches(i))
         {
 
-            std::cout << "( " << k.awayTeam.getTitle() << ", " << k.homeGoals << ", " << k.awayGoals << ", " << k.points << " )";
+            std::cout << "( " << k->awayTeam->getTitle() << ", " << k->homeGoals << ", " << (k->checked? "CHECKED" : "NOT!") << ", " << k->awayGoals << ", " << k->points << " )";
         }
         std::cout << "\n";
     }

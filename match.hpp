@@ -7,11 +7,12 @@
 class Match
 {
 public:
-    Team homeTeam, awayTeam;
+    Team *homeTeam, *awayTeam;
     int homeGoals;
     int points = 0, awayGoals, week;
+    bool checked = false;
     std::time_t date;
-    Match(Team homeT, Team awayT, int homeGoals, int awayGoals, std::string date, int week);
+    Match(Team* homeT, Team* awayT, int homeGoals, int awayGoals, std::string date, int week);
     Match() = default;
 };
 #endif

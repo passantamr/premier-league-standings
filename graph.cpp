@@ -6,10 +6,7 @@
 #include "graph.hpp"
 #include "match.hpp"
 
-Graph::Graph()
-{
-    this->edges = {};
-};
+Graph::Graph(){};
 void Graph::add_match(std::vector<std::string> row)
 {
 
@@ -17,28 +14,29 @@ void Graph::add_match(std::vector<std::string> row)
     auto away = this->add_team((std::string)row[3]);
     if (row[4] != "-")
     {
-        auto m = Match(home, away, std::stoi(row[4]), std::stoi(row[5]), (std::string)row[1], std::stoi(row[0]));
+        auto m = new Match(home, away, std::stoi(row[4]), std::stoi(row[5]), (std::string)row[1], std::stoi(row[0]));
         this->edges[home].push_back(m);
     }
 }
-Team Graph::add_team(std::string title)
+Team *Graph::add_team(std::string title)
 {
-    auto it = std::find_if(this->teams.begin(), this->teams.end(), [title](Team &team)
-                           { return team.getTitle() == title; });
-    auto team = Team(title);
+    auto it = std::find_if(this->teams.begin(), this->teams.end(), [title](Team* team)
+                           { return team->getTitle() == title; });
 
     if (it == this->teams.end())
     {
+        auto team = new Team(title);
         this->teams.push_back(team);
+        return team;
     }
-    return team;
+    return (*it);
 }
 
-std::vector<Team> Graph::getTeams()
+std::vector<Team *> Graph::getTeams()
 {
     return this->teams;
 };
-std::vector<Match> Graph::getTeamMatches(Team team)
+std::vector<Match *> Graph::getTeamMatches(Team *team)
 {
     return this->edges[team];
-};
+}

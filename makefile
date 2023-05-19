@@ -1,7 +1,7 @@
 CC = g++
 CFLAGS = -Wall
 LDFLAGS = 
-OBJ = graph.o hydrator.o match.o team.o  main.o
+OBJ = graph.o hydrator.o match.o team.o graph_dfs.o standing.o  main.o
 EXEC = standing
 
 all: $(EXEC)

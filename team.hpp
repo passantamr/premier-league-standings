@@ -8,15 +8,17 @@ class Team
 {
 private:
     std::string title;
+    int index;
 
 public:
     bool checked = false;
-    Team(std::string title);
+    Team(std::string title, int index);
     Team() = default;
     bool operator<(const Team &other) const
     {
         return this->title < other.title;
     }
     std::string getTitle();
+    int getIndex();
 };
 #endif

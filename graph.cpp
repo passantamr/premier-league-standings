@@ -20,12 +20,13 @@ void Graph::add_match(std::vector<std::string> row)
 }
 Team *Graph::add_team(std::string title)
 {
-    auto it = std::find_if(this->teams.begin(), this->teams.end(), [title](Team* team)
+    auto it = std::find_if(this->teams.begin(), this->teams.end(), [title](Team *team)
                            { return team->getTitle() == title; });
 
     if (it == this->teams.end())
     {
-        auto team = new Team(title);
+        
+        auto team = new Team(title, this->index++);
         this->teams.push_back(team);
         return team;
     }

@@ -23,3 +23,8 @@ Match::Match(Team *homeT, Team *awayT, int homeGoals, int awayGoals, std::string
 
     this->date = std::mktime(&tm);
 }
+
+std::vector<Team *> Match::teams(){
+    std::vector<Team *> teams = {this->awayTeam, this->homeTeam};
+    return teams;
+}

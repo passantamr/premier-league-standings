@@ -1,9 +1,14 @@
 
 #include <iostream>
+#include <vector>
+#include <algorithm>
 
 #include "graph.hpp"
 #include "hydrator.hpp"
-int main()
+#include "standing.hpp"
+#include "team.hpp"
+
+int main(int argc, char *argv[])
 {
 
     Graph graph = Graph();
@@ -12,17 +17,31 @@ int main()
     for (int i = 1; i < content.size(); i++)
     {
         graph.add_match(content[i]);
-    }
-    for (auto i : graph.getTeams())
-    {
-        std::cout << i->getTitle() << ":  ";
-        for (auto k : graph.getTeamMatches(i))
-        {
-
-            std::cout << "( " << k->awayTeam->getTitle() << ", " << k->homeGoals << ", " << (k->checked? "CHECKED" : "NOT!") << ", " << k->awayGoals << ", " << k->points << " )";
         }
-        std::cout << "\n";
-    }
 
-    return 0;
-}
+        std::vector<Standing *> standings = graph.dfs();
+        /* std::sort(standings.begin(), standings.end()); */
+        std::cout << "Team"
+                  << ", "
+                  << "Matches"
+                  << ", "
+                  << "Win"
+                  << ", "
+                  << "Draw"
+                  << ", "
+                  << "Lose"
+                  << ", "
+                  << "GF"
+                  << ", "
+                  << "GA"
+                  << ", "
+                  << "GD"
+                  << ", "
+                  << "Points" << std::endl;
+        for (auto entry : standings)
+        {
+            std::cout << entry->team.getTitle() << ", " << entry->getMatches() << ", " << entry->getWin() << ", " << entry->getDraw() << ", " << entry->getLose() << ", " << entry->getGoalsScored() << ", " << entry->getGoalsRecived() << ", " << entry->getGoalDiff() << ", " << entry->getPoints() << std::endl;
+        }
+
+        return 0;
+    }

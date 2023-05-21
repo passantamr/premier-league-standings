@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-
+#include <fstream>
 #include "graph.hpp"
 #include "hydrator.hpp"
 #include "standing.hpp"
@@ -56,10 +56,31 @@ int main(int argc, char *argv[])
                   << "GD"
                   << ", "
                   << "Points" << std::endl;
+          std::ofstream output;
+            output.open("result.csv");
+           output << "Team"
+                  << ","
+                  << "Matches"
+                  << ","
+                  << "Win"
+                  << ","
+                  << "Draw"
+                  << ","
+                  << "Lose"
+                  << ","
+                  << "GF"
+                  << ","
+                  << "GA"
+                  << ","
+                  << "GD"
+                  << ","
+                  << "Points" << "\n";
         for (auto entry : standings)
         {
             std::cout << entry->team.getTitle() << ", " << entry->getMatches() << ", " << entry->getWin() << ", " << entry->getDraw() << ", " << entry->getLose() << ", " << entry->getGoalsScored() << ", " << entry->getGoalsRecived() << ", " << entry->getGoalDiff() << ", " << entry->getPoints() << std::endl;
-        }
+            output << entry->team.getTitle() << "," << entry->getMatches() << "," << entry->getWin() << "," << entry->getDraw() << "," << entry->getLose() << "," << entry->getGoalsScored() << "," << entry->getGoalsRecived() << "," << entry->getGoalDiff() << "," << entry->getPoints()<<"\n";
 
+        }
+          output.close();
         return 0;
     }

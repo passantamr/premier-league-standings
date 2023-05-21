@@ -28,13 +28,31 @@ struct sortv
 };
 int main(int argc, char *argv[])
 {
+     int num=0,index=0;
+    for(int i=1;i<argc;i++){
+        if(argv[i][0]=='-' && argv[i][1]=='w'){ index = i+1;}
+    }
+    
+    {
+        int i =1,counter = 1;
+        char c = argv[index][0];
+        while(c != NULL){
+            num *= i;
+            num += (c-48);
+            i *=10;
+            c = argv[index][counter];
+            counter++;
+        }
+    }
+    
+    limit = argv[1] != NULL ? num : 0;
 
     Graph graph = Graph();
     std::vector<std::vector<std::string>> content = hydrator(graph, "epl_results.csv");
 
     for (int i = 1; i < content.size(); i++)
     {
-        graph.add_match(content[i]);
+        graph.add_match(content[i],limit);
         }
 
         std::vector<Standing *> standings = graph.dfs();

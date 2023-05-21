@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
 
     for (int i = 1; i < content.size(); i++)
     {
-        graph.add_match(content[i]);
+        graph.add_match(content[i],limit);
         }
 
         std::vector<Standing *> standings = graph.dfs();

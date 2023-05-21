@@ -17,7 +17,7 @@ private:
 public:
     Graph();
     Team* add_team(std::string title);
-    void add_match(std::vector<std::string> row,int limit);
+    void add_match(std::vector<std::string> row,int limit,int date);
     std::vector<Team*> getTeams();
     std::vector<Match*> getTeamMatches(Team* team);
     std::vector<Standing *> dfs();

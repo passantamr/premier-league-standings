@@ -7,15 +7,28 @@
 #include "match.hpp"
 
 Graph::Graph(){};
-void Graph::add_match(std::vector<std::string> row)
+void Graph::add_match(std::vector<std::string> row,int limit)
 {
 
-    auto home = this->add_team((std::string)row[2]);
-    auto away = this->add_team((std::string)row[3]);
-    if (row[4] != "-")
-    {
-        auto m = new Match(home, away, std::stoi(row[4]), std::stoi(row[5]), (std::string)row[1], std::stoi(row[0]));
-        this->edges[home].push_back(m);
+    int week = std::stoi(row[0]);
+    if(limit>0){
+        if(week <= limit){
+            auto home = this->add_team((std::string)row[2]);
+            auto away = this->add_team((std::string)row[3]);
+            if (row[4] != "-")
+            {
+                auto m = new Match(home, away, std::stoi(row[4]), std::stoi(row[5]), (std::string)row[1], std::stoi(row[0]));
+                this->edges[home].push_back(m);
+            }
+        }
+    }else{
+        auto home = this->add_team((std::string)row[2]);
+        auto away = this->add_team((std::string)row[3]);
+        if (row[4] != "-")
+        {
+            auto m = new Match(home, away, std::stoi(row[4]), std::stoi(row[5]), (std::string)row[1], std::stoi(row[0]));
+            this->edges[home].push_back(m);
+        }
     }
 }
 Team *Graph::add_team(std::string title)

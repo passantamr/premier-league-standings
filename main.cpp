@@ -30,12 +30,22 @@ struct sortv
 };
 int main(int argc, char const *argv[])
 {
-    int num = -1;
+    int num = -1,intDate=0;
+    std::string date;
     for (int i = 1; i < argc; i++)
     {
         if (!strcmp(argv[i], "-w"))
         {
             num = std::atoi(argv[i + 1]);
+            break;
+        }else if(!strcmp(argv[i], "-d")){
+            date = argv[i+1];
+            //strcpy(date,argv[i+1]);
+            std::tm tm = {};
+            std::istringstream iss(date);
+            iss >> std::get_time(&tm, "%d/%m/%Y");
+            intDate = std::mktime(&tm);
+            break;
         }
     }
 
@@ -45,7 +55,7 @@ int main(int argc, char const *argv[])
 
     for (int i = 1; i < content.size(); i++)
     {
-        graph.add_match(content[i], num);
+        graph.add_match(content[i], num,intDate);
     }
 
     std::vector<Standing *> standings = graph.dfs();
